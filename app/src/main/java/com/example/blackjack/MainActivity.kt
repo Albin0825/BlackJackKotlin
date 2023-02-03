@@ -134,6 +134,9 @@ class MainActivity : AppCompatActivity() {
     fun createCard(who: Hand) {
         ////For more information look in the file Shoe, function drawCard
         val card = shoe.drawCard()
+        if(card.rank == "ace") {
+            who.ace += 1
+        }
 
 
 
@@ -162,7 +165,11 @@ class MainActivity : AppCompatActivity() {
 
 
         //For more information look in the file MainActivity, function printScore
-        printScore(card.value, who)
+        if(who.num > 10 && card.value == 11) {
+            printScore(1, who)
+        } else {
+            printScore(card.value, who)
+        }
 
 
 
@@ -205,7 +212,7 @@ class MainActivity : AppCompatActivity() {
                     if(i == 16) {
                         end()
                     }
-                }, 120 * i.toLong())
+                }, 150 * i.toLong())
             }
         } else {
             printCondision(check.winCon(player, pc))
